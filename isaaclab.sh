@@ -16,7 +16,15 @@ set -e
 tabs 4
 
 # get source directory
-export ISAACLAB_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+if [ -n "$BASH_VERSION" ]; then
+    # Bash
+    ISAACLAB_PATH=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+else
+    # Fallback for other shells
+    ISAACLAB_PATH=$(cd "$(dirname "$0")" && pwd)
+fi
+
+echo "ISSACLAB_PATH: ${ISAACLAB_PATH}"
 
 #==
 # Helper functions
